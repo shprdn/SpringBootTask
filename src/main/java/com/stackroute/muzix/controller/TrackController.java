@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -73,5 +74,22 @@ public class TrackController {
         trackService.updateTrack(track);
         responseEntity = new ResponseEntity("successfully updated",HttpStatus.OK);
         return responseEntity;
+    }
+
+    //fetching record based on the name 
+    @GetMapping("track/{name}")
+    public ResponseEntity<?> queryList(@PathVariable String name)
+    {
+        ResponseEntity responseEntity;
+        try
+        {
+            return new ResponseEntity<>(trackService.findByName(name), HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
+        }
+
+
     }
 }

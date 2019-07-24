@@ -6,6 +6,8 @@ import com.stackroute.muzix.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 //service class to perform operations
@@ -43,6 +45,13 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public Track updateTrack(Track track) {
         Track track1 = trackRepository.save(track);
+        return track1;
+    }
+    //find using name
+    @Override
+    public Track findByName(String name)
+    {
+        Track track1 = trackRepository.findUserByName(name);
         return track1;
     }
 }

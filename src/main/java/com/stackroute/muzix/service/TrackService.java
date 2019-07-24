@@ -20,4 +20,7 @@ public interface TrackService {
     //update
     public Track updateTrack(Track track);
 
+    //find by name
+    Track findByName(String name);
+
 }
