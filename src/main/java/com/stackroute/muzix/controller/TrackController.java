@@ -1,6 +1,8 @@
 package com.stackroute.muzix.controller;
 
 import com.stackroute.muzix.domain.Track;
+import com.stackroute.muzix.exceptions.TrackAlreadyExistsException;
+import com.stackroute.muzix.exceptions.TrackNotFoundException;
 import com.stackroute.muzix.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +38,7 @@ public class TrackController {
             trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
         }
-        catch (Exception e)
+        catch (TrackAlreadyExistsException e)
         {
             responseEntity = new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
         }
@@ -59,7 +61,7 @@ public class TrackController {
             trackService.deleteTrack(id);
             responseEntity = new ResponseEntity<String>("successfully deleted", HttpStatus.OK);
         }
-        catch (Exception e)
+        catch (TrackNotFoundException e)
         {
             responseEntity = new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
         }
@@ -76,7 +78,6 @@ public class TrackController {
         return responseEntity;
     }
 
-    //fetching record based on the name 
     @GetMapping("track/{name}")
     public ResponseEntity<?> queryList(@PathVariable String name)
     {
@@ -89,7 +90,6 @@ public class TrackController {
         {
             return new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
         }
-
 
     }
 }

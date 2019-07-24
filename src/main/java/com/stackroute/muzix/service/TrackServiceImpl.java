@@ -2,6 +2,8 @@ package com.stackroute.muzix.service;
 
 import com.stackroute.muzix.domain.Track;
 
+import com.stackroute.muzix.exceptions.TrackAlreadyExistsException;
+import com.stackroute.muzix.exceptions.TrackNotFoundException;
 import com.stackroute.muzix.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,12 @@ public class TrackServiceImpl implements TrackService {
 
     //saveTrack
     @Override
-    public Track saveTrack(Track track) {
+    public Track saveTrack(Track track) throws TrackAlreadyExistsException {
+        //finding if track exists with getid
+        if (trackRepository.existsById(track.getId()))
+        {
+            throw new TrackAlreadyExistsException("Track already exists...");
+        }
         Track savedTrack = trackRepository.save(track);
         return savedTrack;
     }
@@ -37,7 +44,13 @@ public class TrackServiceImpl implements TrackService {
 
     //delete specific id
     @Override
-    public void deleteTrack(int id) {
+    public void deleteTrack(int id) throws TrackNotFoundException {
+        //if id doesnt exists means track is not there
+        if (!trackRepository.existsById(id))
+        {
+            throw new TrackNotFoundException("Track doesn't exists...");
+        }
+
          trackRepository.deleteById(id);
     }
 
