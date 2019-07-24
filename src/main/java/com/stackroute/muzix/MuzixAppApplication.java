@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@ComponentScan
 public class MuzixAppApplication {
 
-	//muzixApp having main method 
+	//muzixApp having main method
 	public static void main(String[] args) {
 		SpringApplication.run(MuzixAppApplication.class, args);
 	}
