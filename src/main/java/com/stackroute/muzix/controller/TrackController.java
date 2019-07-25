@@ -20,8 +20,6 @@ public class TrackController {
     //update all the methods with code
 
     private TrackService trackService;
-    @Autowired
-    private Track track;
 
     //arg constructor
     @Autowired
