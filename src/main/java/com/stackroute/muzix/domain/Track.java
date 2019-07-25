@@ -8,7 +8,7 @@ public class Track {
     //data variables for databases
     // id to be generated on its own
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String name;

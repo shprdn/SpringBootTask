@@ -20,6 +20,8 @@ public class TrackController {
     //update all the methods with code
 
     private TrackService trackService;
+    @Autowired
+    private Track track;
 
     //arg constructor
     @Autowired
@@ -29,20 +31,13 @@ public class TrackController {
     }
     //mapping done for saving the track to the database
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track)
+    public ResponseEntity<?> saveTrack(@RequestBody Track track) throws TrackAlreadyExistsException
     {
         ResponseEntity responseEntity;
-        //exception handling
-        try
-        {
-            trackService.saveTrack(track);
+        //exception handling using global exception
+         trackService.saveTrack(track);
             responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
-        }
-        catch (TrackAlreadyExistsException e)
-        {
-            responseEntity = new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
-        }
-        return responseEntity;
+            return responseEntity;
     }
     //mapping done for fetching all tracks
     @GetMapping("track")
@@ -53,18 +48,13 @@ public class TrackController {
 
     //mapping done for deleting a specific id from the database
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteEntity(@PathVariable int id)
+    public ResponseEntity<?> deleteEntity(@PathVariable int id) throws TrackNotFoundException
     {
+        //exception handling using global exception
         ResponseEntity responseEntity;
-        try
-        {
             trackService.deleteTrack(id);
             responseEntity = new ResponseEntity<String>("successfully deleted", HttpStatus.OK);
-        }
-        catch (TrackNotFoundException e)
-        {
-            responseEntity = new ResponseEntity(e.getMessage(),HttpStatus.CONFLICT);
-        }
+
         return responseEntity;
     }
 
@@ -78,6 +68,7 @@ public class TrackController {
         return responseEntity;
     }
 
+    //getting track by name
     @GetMapping("track/{name}")
     public ResponseEntity<?> queryList(@PathVariable String name)
     {
