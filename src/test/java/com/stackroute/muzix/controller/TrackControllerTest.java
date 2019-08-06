@@ -73,7 +73,7 @@ public class TrackControllerTest {
     }
     //test case to check savetrack method for failure case
     @Test
-    public void saveUserFailure() throws Exception {
+    public void saveTrackFailure() throws Exception {
         when(trackService.saveTrack(any())).thenThrow(TrackAlreadyExistsException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/track")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
