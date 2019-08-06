@@ -62,7 +62,7 @@ public class TrackServiceTest {
     }
     //test case to check for savetrack method for failure case
     @Test(expected = TrackAlreadyExistsException.class)
-    public void saveUserTestFailure() throws TrackAlreadyExistsException {
+    public void saveTrackTestFailure() throws TrackAlreadyExistsException {
         when(trackRepository.save((Track) any())).thenReturn(null);
         Track savedUser = trackService.saveTrack(track);
         System.out.println("savedTrack" + savedUser);
