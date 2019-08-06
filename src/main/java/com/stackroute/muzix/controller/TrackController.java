@@ -81,7 +81,7 @@ public class TrackController {
     }
     //fetching all top tracks
     @GetMapping("track/muzix")
-    public ResponseEntity<?> getAllTrackFromLastFm()
+    public ResponseEntity<?> getAllTrack()
     {
         trackService.getTopTracks();
         return new ResponseEntity<>("fetched.....", HttpStatus.OK);
