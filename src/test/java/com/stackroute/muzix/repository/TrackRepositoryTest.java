@@ -39,14 +39,14 @@ public class TrackRepositoryTest {
     }
     //test case to check for savetrack method
     @Test
-    public void testSaveUser(){
+    public void testSaveTracks(){
         trackRepository.save(track);
         Track fetchUser = trackRepository.findById(track.getId()).get();
         Assert.assertEquals(0,fetchUser.getId());
     }
     //test case to check savetrack method for failure case
     @Test
-    public void testSaveUserFailure(){
+    public void testTrackFailure(){
         Track testUser = new Track("Buddhu sa Mann","Amaal Malik");
         trackRepository.save(track);
         Track fetchUser = trackRepository.findById(track.getId()).get();
@@ -54,7 +54,7 @@ public class TrackRepositoryTest {
     }
     //test case to check for getAllTracks method
     @Test
-    public void testGetAllUser(){
+    public void testGetAllTracks(){
          Track t = new Track(1,"Dil me ho tum","Armaan Malik");
          Track t1 = new Track(2,"suraj dooba hai","Amaal Malik");
         trackRepository.save(t);
